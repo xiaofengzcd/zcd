@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.javen.dao.VisitorMapper">
+    <resultMap id="BaseResultMap" type="com.javen.model.Visitor">
+        <!--@mbg.generated-->
+        <id column="id" jdbcType="BIGINT" property="id" />
+        <result column="username" jdbcType="VARCHAR" property="username" />
+        <result column="password" jdbcType="VARCHAR" property="password" />
+
+    </resultMap>
+
+    <resultMap id="BaseResultMapVisitor" type="com.javen.model.Visitor">
+        <!--@mbg.generated-->
+        <id column="id" jdbcType="BIGINT" property="id" />
+        <result column="username" jdbcType="VARCHAR" property="username" />
+        <result column="password" jdbcType="VARCHAR" property="password" />
+    </resultMap>
+  <!--  <sql id="Base_Column_List">
+        id, username, password
+    </sql>-->
+
+    <select id="selectByid" parameterType="int" resultMap="BaseResultMap">
+    select username,password
+      from visitor
+      where id = #{id} ;
+  </select>
+</mapper>
