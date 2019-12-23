@@ -8,4 +8,8 @@ package com.javen.collections;
  * @date 2019/6/27 10:46
  */
 public class Test {
+   public void git(){
+       System.out.println("测试git有无反应");
+   }
+
 }
