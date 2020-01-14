@@ -39,8 +39,11 @@ public class MapTest {
     public static void main(String[] args) {
         test();
     }
-    
-   /*神奇的HashMap,为啥倒着排*/
+    /**
+     * @description: 神奇的HashMap,为啥倒着排
+     * @author zcd
+     * @date 2019/12/26 11:21
+     */
     static void  test(){
         List<String> list = new ArrayList<String>();
         ArrayList<String> list02 = new ArrayList<String>();

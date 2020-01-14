@@ -1,5 +1,7 @@
 package com.javen.controller;
 
+import com.javen.pojo.Girl;
+import com.javen.service.GirlService;
 import com.javen.service.TestService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
@@ -24,7 +26,7 @@ import java.util.List;
 public class TestRestController {
     @Autowired
     TestService testService;
-    
+
     @RequestMapping("/zcd")
     public List<String> Test(
             @RequestParam(required = false, defaultValue = "") final String requestParam,
@@ -45,10 +47,19 @@ public class TestRestController {
         //System.out.println(request);
         return stringList02;
     }
-    
+
     @RequestMapping("/zcx")
     public String Test02() {
         testService.Put();
         return "test";
+    }
+
+    @Autowired
+    private GirlService girlService;
+
+    @RequestMapping("/test")
+    public Girl test(int id) {
+        id = 2;
+        return this.girlService.getGirlById(id);
     }
 }

@@ -50,7 +50,7 @@
 
   <!-- 配置ViewResolver 。可用多个ViewResolver 。使用order属性排序。   InternalResourceViewResolver 放在最后-->
   <bean class="org.springframework.web.servlet.view.ContentNegotiatingViewResolver">
-    <property name="order" value="0"></property>
+    <property name="order" value="1"></property>
     <property name="mediaTypes">
       <map>
         <!-- 告诉视图解析器，返回的类型为json格式 -->
@@ -72,7 +72,7 @@
 
   <!-- 定义跳转的文件的前后缀 ，视图模式配置-->
   <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-    <property name="order" value="1"></property>
+    <property name="order" value="0"></property>
     <!-- 这里的配置我的理解是自动给后面action的方法return的字符串加上前缀和后缀，变成一个 可用的url地址 -->
     <property name="prefix" value="/WEB-INF/jsp/"/>
     <property name="suffix" value=".jsp"/>

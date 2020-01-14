@@ -42,7 +42,7 @@ public class TestServiceImpl implements TestService {
     
     @Override
     public List<String> list02() {
-        List list = new ArrayList();
+        List<String> list = new ArrayList<String>();
         list.add("abcd");
         list.add("0101");
         list.add("0101");
