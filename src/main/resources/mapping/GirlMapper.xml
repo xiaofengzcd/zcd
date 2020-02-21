@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.javen.dao.GirlDao">
-    <resultMap id="BaseResultMap" type="com.javen.pojo.Girl">
+<mapper namespace="com.zcd.dao.GirlDao">
+    <resultMap id="BaseResultMap" type="com.zcd.pojo.Girl">
         <id column="id" property="id" jdbcType="INTEGER"/>
         <result column="name" property="name" jdbcType="VARCHAR"/>
         <result column="time" property="time" jdbcType="TIME"/>
@@ -17,17 +17,41 @@
         from girl
         where id = #{id,jdbcType=INTEGER}
     </select>
+    <!--copy过来的伪代码,意思就是: 先查t1表和t3表,然后把满足on后面条件的结果加入到t1表中
+    不满足的显示为null或者空,再把这表的结果集跟t2表左连接,即满足t2.paper_id=t3.paper_id
+    的数据加入到之前的结果集中,然后对三个表的查询结果集用where进行判断-->
+    <!--<select id="list" parameterType="java.lang.String" resultMap="ResultMap">
+        select
+            t1.*,
+            t2.paper_id,
+            t2.sort_no,
+            t2.sort_no_prefix,
+            t2.create_time,
+            t2.commit_time,
+            t2.paperStatus,
+            t2.paperName
+        from audit_report as t1 left join audit_report_paper as t3 on
+            t1.audit_report_id = t3.audit_report_id
+                                left join paper as t2 on t2.paper_id = t3.paper_id
+        where t1.status > 0 and t1.auditReportId = #{auditReportId,jdbcType=VARCHAR}
+    </select>-->
+
+
+
+
+
+
     <!--<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
         delete from user_t
         where id = #{id,jdbcType=INTEGER}
     </delete>
-    <insert id="insert" parameterType="com.javen.model.User">
+    <insert id="insert" parameterType="com.zcd.model.User">
         insert into user_t (id, user_name, password,
                             age)
         values (#{id,jdbcType=INTEGER}, #{userName,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR},
                 #{age,jdbcType=INTEGER})
     </insert>
-    <insert id="insertSelective" parameterType="com.javen.model.User">
+    <insert id="insertSelective" parameterType="com.zcd.model.User">
         insert into user_t
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="id != null">
@@ -58,7 +82,7 @@
             </if>
         </trim>
     </insert>
-    <update id="updateByPrimaryKeySelective" parameterType="com.javen.model.User">
+    <update id="updateByPrimaryKeySelective" parameterType="com.zcd.model.User">
         update user_t
         <set>
             <if test="userName != null">
@@ -73,7 +97,7 @@
         </set>
         where id = #{id,jdbcType=INTEGER}
     </update>
-    <update id="updateByPrimaryKey" parameterType="com.javen.model.User">
+    <update id="updateByPrimaryKey" parameterType="com.zcd.model.User">
         update user_t
         set user_name = #{userName,jdbcType=VARCHAR},
             password = #{password,jdbcType=VARCHAR},
