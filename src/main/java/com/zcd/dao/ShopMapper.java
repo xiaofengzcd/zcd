@@ -12,4 +12,6 @@ import java.util.List;
 public interface ShopMapper {
     List<Shop> index(String recommend);
 
+    List<Shop> login(String name);
+
 }

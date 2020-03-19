@@ -9,4 +9,6 @@ import com.zcd.pojo.Girl;
  */
 public interface GirlService {
     public Girl getGirlById(int id);
+
+    public Girl login(String name);
 }

@@ -13,4 +13,6 @@ public interface GirlDao {
 
     Girl selectById(int id);
 
+    Girl login(String name);
+
 }

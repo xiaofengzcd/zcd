@@ -24,6 +24,12 @@
           id, username, password
       </sql>-->
 
+    <select id="login" parameterType="String" resultMap="BaseResultMap">
+        select *
+        from shop
+        where name = #{name,jdbcType=VARCHAR} ;
+    </select>
+
     <select id="index" parameterType="String" resultMap="BaseResultMap">
         select *
         from shop

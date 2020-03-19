@@ -23,4 +23,9 @@ public class ShopServiceImpl implements ShopService {
     public List<Shop> index(String recommend) {
         return shopMapper.index(recommend);
     }
+
+    @Override
+    public List<Shop> login(String name) {
+        return shopMapper.login(name);
+    }
 }

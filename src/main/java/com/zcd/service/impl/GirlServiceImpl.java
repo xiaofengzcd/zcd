@@ -22,6 +22,10 @@ public class GirlServiceImpl implements GirlService {
         return this.girlDao.selectById(id);
     }
 
+    @Override
+    public Girl login(String name) {
+        return this.girlDao.login(name);
+    }
 
 
 }

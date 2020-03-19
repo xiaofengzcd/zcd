@@ -12,4 +12,6 @@ import java.util.List;
  */
 public interface ShopService {
     public List<Shop> index(String recommend);
+
+    public List<Shop> login(String name);
 }
