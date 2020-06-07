@@ -19,5 +19,10 @@ public class UserServiceImpl implements IUserService {
         // TODO Auto-generated method stub  
         return this.userDao.selectByPrimaryKey(userId);
     }
-    
+
+    @Override
+    public User getUserByName(String username) {
+        return this.userDao.selectByName(username);
+    }
+
 }  

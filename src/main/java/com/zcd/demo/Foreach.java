@@ -1,4 +1,4 @@
-package com.zcd.pojo;
+package com.zcd.demo;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -6,6 +6,12 @@ import java.util.List;
 /**
  * @author zcd
  * @description foreach测试
+ *              通常用于遍历list和数组,比如我要读取这个list里的每一个数据
+ *              就可以写成 for( target : list){
+ *                  // 然后这里就写 对list里的每一个数据的操作,比如
+ *                  map.put("key",target)
+ *              }
+ *              总之,要对list里的数据批量操作,遍历就对了
  * @date 2019/10/27
  */
 public class Foreach {

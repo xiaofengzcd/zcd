@@ -1,6 +1,6 @@
 package com.zcd.dao;
 
-import com.zcd.pojo.Girl;
+import com.zcd.model.Girl;
 
 /**
  * @author zcd

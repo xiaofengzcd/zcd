@@ -1,6 +1,6 @@
 package com.zcd.service;
 
-import com.zcd.pojo.Girl;
+import com.zcd.model.Girl;
 
 /**
  * @author zcd

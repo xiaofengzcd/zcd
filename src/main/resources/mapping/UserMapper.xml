@@ -7,7 +7,18 @@
     <result column="password" property="password" jdbcType="VARCHAR"/>
     <result column="age" property="age" jdbcType="INTEGER"/>
   </resultMap>
-  <sql id="Base_Column_List">
+
+
+  <select id="selectByName" resultMap="BaseResultMap" parameterType="java.lang.String">
+    select
+    *
+    from user
+    where id = #{name,jdbcType=VARCHAR}
+  </select>
+
+
+
+  <!--<sql id="Base_Column_List">
     id, user_name, password, age
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
@@ -78,5 +89,5 @@
     password = #{password,jdbcType=VARCHAR},
     age = #{age,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
-  </update>
+  </update>-->
 </mapper>

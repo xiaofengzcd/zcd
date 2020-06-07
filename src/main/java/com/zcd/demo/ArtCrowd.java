@@ -1,4 +1,4 @@
-package com.zcd.pojo;
+package com.zcd.demo;
 
 import com.github.liaochong.myexcel.core.annotation.ExcelColumn;
 import com.github.liaochong.myexcel.core.annotation.ExcelTable;

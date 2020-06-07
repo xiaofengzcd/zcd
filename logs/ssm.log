@@ -267,4 +267,21 @@ Caused by: java.io.FileNotFoundException: Could not open ServletContext resource
   [INFO] [2019-11-22 09:24:16][com.zcd.easyExcel.ExcelUtil]找不到文件或文件路径错误, 文件：C:/Users/Administrator/Desktop/demo.xlsx
   [INFO] [2019-11-22 09:25:27][com.zcd.easyExcel.ExcelUtil]找不到文件或文件路径错误, 文件：C:\Users\Administrator\Desktop\demo.xlsx
   [INFO] [2019-11-22 09:25:53][com.zcd.easyExcel.ExcelUtil]找不到文件或文件路径错误, 文件：C:\Users\Administrator\Desktop\demo.xlsx
-  
+  [ERROR] [2020-04-22 16:08:05][com.deepoove.poi.XWPFTemplate]Cannot find the file
+  java.io.FileNotFoundException: C:\Users\Administrator\Desktop\爱迪尔房卡 (系统找不到指定的文件。)
+	at java.io.FileInputStream.open0(Native Method)
+	at java.io.FileInputStream.open(FileInputStream.java:195)
+	at java.io.FileInputStream.<init>(FileInputStream.java:138)
+	at com.deepoove.poi.XWPFTemplate.compile(XWPFTemplate.java:111)
+	at com.deepoove.poi.XWPFTemplate.compile(XWPFTemplate.java:79)
+	at com.deepoove.poi.XWPFTemplate.compile(XWPFTemplate.java:75)
+	at com.zcd.word.WordTest.main(WordTest.java:40)
+[ERROR] [2020-04-22 16:09:29][com.deepoove.poi.XWPFTemplate]Cannot find the file
+  java.io.FileNotFoundException: C:\Users\Administrator\Desktop\爱迪尔房卡.doc (系统找不到指定的文件。)
+	at java.io.FileInputStream.open0(Native Method)
+	at java.io.FileInputStream.open(FileInputStream.java:195)
+	at java.io.FileInputStream.<init>(FileInputStream.java:138)
+	at com.deepoove.poi.XWPFTemplate.compile(XWPFTemplate.java:111)
+	at com.deepoove.poi.XWPFTemplate.compile(XWPFTemplate.java:79)
+	at com.deepoove.poi.XWPFTemplate.compile(XWPFTemplate.java:75)
+	at com.zcd.word.WordTest.main(WordTest.java:40)

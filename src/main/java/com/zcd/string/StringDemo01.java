@@ -1,4 +1,4 @@
-package com.zcd.stringTest;
+package com.zcd.string;
 
 /**
  * @author zcd

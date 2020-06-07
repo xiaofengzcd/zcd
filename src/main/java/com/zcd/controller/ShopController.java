@@ -55,6 +55,7 @@ public class ShopController {
      */
     @RequestMapping(value = "/login",produces = "application/json;charset=utf-8")
     public String login( @RequestParam String name){
+        //实际情况应为对比,这里只做测试,仅查询
         name = "末世" ; //模拟用户名和密码登陆
         List<Shop> user = shopService.login(name);
         System.out.println(user);

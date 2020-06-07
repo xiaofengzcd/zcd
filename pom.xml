@@ -226,6 +226,14 @@
             <version>3.14</version>
         </dependency>
 
+        <!-- https://mvnrepository.com/artifact/com.deepoove/poi-tl -->
+        <dependency>
+            <groupId>com.deepoove</groupId>
+            <artifactId>poi-tl</artifactId>
+            <version>1.4.2</version>
+        </dependency>
+
+
         <dependency> <!-- 操作File好用 可选 -->
             <groupId>commons-io</groupId>
             <artifactId>commons-io</artifactId>
@@ -260,6 +268,12 @@
             <groupId>net.oschina.zcx7878</groupId>
             <artifactId>fastdfs-client-java</artifactId>
             <version>1.27.0.0</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.shiro</groupId>
+            <artifactId>shiro-spring</artifactId>
+            <version>1.4.0</version>
         </dependency>
 
 

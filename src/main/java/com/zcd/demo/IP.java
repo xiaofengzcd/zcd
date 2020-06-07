@@ -1,4 +1,4 @@
-package com.zcd.pojo;
+package com.zcd.demo;
 
 import javax.servlet.http.HttpServletRequest;
 

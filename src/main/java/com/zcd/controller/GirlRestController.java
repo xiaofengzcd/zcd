@@ -1,6 +1,6 @@
 package com.zcd.controller;
 
-import com.zcd.pojo.Girl;
+import com.zcd.model.Girl;
 import com.zcd.service.GirlService;
 import com.zcd.util.JsonUtil;
 import org.springframework.beans.factory.annotation.Autowired;
