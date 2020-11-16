@@ -2,7 +2,7 @@ package com.zcd.controller;
 
 import com.zcd.model.Girl;
 import com.zcd.service.GirlService;
-import com.zcd.util.JsonUtil;
+import com.zcd.zcdutil.JsonUtilzcd;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -33,9 +33,9 @@ public class GirlRestController {
 
          Girl user = girlService.login(name);
          if(user == null){
-             return JsonUtil.getJson("没有这个人");
+             return JsonUtilzcd.getJson("没有这个人");
          }else {
-             return JsonUtil.getJson("登陆成功");
+             return JsonUtilzcd.getJson("登陆成功");
          }
 
     }

@@ -2,6 +2,7 @@ package com.zcd.service.impl;
 
 import com.zcd.dao.ShopMapper;
 import com.zcd.model.Shop;
+import com.zcd.model.User;
 import com.zcd.service.ShopService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -25,7 +26,7 @@ public class ShopServiceImpl implements ShopService {
     }
 
     @Override
-    public List<Shop> login(String name) {
-        return shopMapper.login(name);
+    public List<User> login(String user_name , String password) {
+        return shopMapper.login(user_name, password);
     }
 }

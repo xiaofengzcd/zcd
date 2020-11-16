@@ -4,8 +4,7 @@ import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.zcd.model.Visitor;
 import com.zcd.service.VisitorService;
-import com.zcd.util.JsonUtil;
-import org.codehaus.jackson.JsonProcessingException;
+import com.zcd.zcdutil.JsonUtilzcd;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -78,7 +77,7 @@ public class VisitorRestController {
     * */
     @RequestMapping(value = "/util",produces = "application/json;charset=utf-8")
     public String useUtil() {
-        return JsonUtil.getJson(new Date());
+        return JsonUtilzcd.getJson(new Date());
     }
 
 

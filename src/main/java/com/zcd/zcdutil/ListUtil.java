@@ -1,4 +1,4 @@
-package com.zcd.util;
+package com.zcd.zcdutil;
 
 import java.util.ArrayList;
 import java.util.List;

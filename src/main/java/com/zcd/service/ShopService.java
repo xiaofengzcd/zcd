@@ -1,6 +1,7 @@
 package com.zcd.service;
 
 import com.zcd.model.Shop;
+import com.zcd.model.User;
 import com.zcd.model.Visitor;
 
 import java.util.List;
@@ -13,5 +14,5 @@ import java.util.List;
 public interface ShopService {
     public List<Shop> index(String recommend);
 
-    public List<Shop> login(String name);
+    public List<User> login(String user_name, String password);
 }

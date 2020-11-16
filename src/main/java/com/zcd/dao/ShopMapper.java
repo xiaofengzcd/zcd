@@ -1,6 +1,7 @@
 package com.zcd.dao;
 
 import com.zcd.model.Shop;
+import com.zcd.model.User;
 
 import java.util.List;
 
@@ -12,6 +13,6 @@ import java.util.List;
 public interface ShopMapper {
     List<Shop> index(String recommend);
 
-    List<Shop> login(String name);
+    List<User> login(String user_name , String password );
 
 }

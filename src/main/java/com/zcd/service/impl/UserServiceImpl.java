@@ -9,6 +9,8 @@ import com.zcd.dao.IUserDao;
 import com.zcd.model.User;
 import com.zcd.service.IUserService;
 
+import java.util.List;
+
 
 @Service("userService")
 public class UserServiceImpl implements IUserService {
@@ -23,6 +25,16 @@ public class UserServiceImpl implements IUserService {
     @Override
     public User getUserByName(String username) {
         return this.userDao.selectByName(username);
+    }
+
+    @Override
+    public void updateByVerifyCode(String VerifyCode) {
+        userDao.updateByVerifyCode(VerifyCode);
+    }
+
+    @Override
+    public User login(String username, String password,String VerifyCode) {
+        return userDao.login( username,  password, VerifyCode);
     }
 
 }  

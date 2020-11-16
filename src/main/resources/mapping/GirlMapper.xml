@@ -6,7 +6,7 @@
         <result column="name" property="name" jdbcType="VARCHAR"/>
         <result column="result" property="result" jdbcType="VARCHAR"/>
     </resultMap>
-    <!--<sql id="Base_Column_List">
+   <!-- <sql id="Base_Column_List">
         id, name, time, result
     </sql>-->
 

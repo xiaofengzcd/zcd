@@ -3,9 +3,10 @@
 <mapper namespace="com.zcd.dao.IUserDao">
   <resultMap id="BaseResultMap" type="com.zcd.model.User">
     <id column="id" property="id" jdbcType="INTEGER"/>
-    <result column="user_name" property="userName" jdbcType="VARCHAR"/>
+    <result column="username" property="username" jdbcType="VARCHAR"/>
     <result column="password" property="password" jdbcType="VARCHAR"/>
     <result column="age" property="age" jdbcType="INTEGER"/>
+    <result column="VerifyCode" property="VerifyCode" jdbcType="VARCHAR"/>
   </resultMap>
 
 
@@ -15,6 +16,21 @@
     from user
     where id = #{name,jdbcType=VARCHAR}
   </select>
+
+  <select id="login" parameterType="String" resultMap="BaseResultMap">
+    select *
+    from user
+    where
+    username = #{username,jdbcType=VARCHAR}
+    AND password = #{password,jdbcType=VARCHAR};
+    <!--<if test="username!=null and username!=''">username = #{username,jdbcType=VARCHAR}</if>
+    <if test="password!=null and password!=''">AND password = #{password,jdbcType=VARCHAR};</if>-->
+  </select>
+
+  <update id="updateByVerifyCode" parameterType="com.zcd.model.User">
+    update user
+    set VerifyCode = #{VerifyCode,jdbcType=VARCHAR}
+  </update>
 
 
 

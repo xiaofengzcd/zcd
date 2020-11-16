@@ -2,9 +2,15 @@ package com.zcd.service;
 
 import com.zcd.model.User;
 
+import java.util.List;
+
 
 public interface IUserService {
-    public User getUserById(int userId);
+   User getUserById(int userId);
 
-    public User getUserByName(String username);
+    User getUserByName(String username);
+
+    void updateByVerifyCode(String VerifyCode);
+
+    User login(String username , String password ,String VerifyCode);
 }  

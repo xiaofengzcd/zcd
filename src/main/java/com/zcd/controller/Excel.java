@@ -33,7 +33,7 @@ public class Excel {
     }
     //  附件加密导出示例：
 
-    /* @GetMapping("/default/excel/example")
+    /* @RequestMapping("/default/excel/example")
      public void defaultBuild(HttpServletResponse response) throws Exception {
          List<ArtCrowd> dataList = this.getDataList();
          Workbook workbook = DefaultExcelBuilder.of(ArtCrowd.class)
