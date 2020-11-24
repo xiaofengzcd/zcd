@@ -12,5 +12,5 @@ public interface IUserService {
 
     void updateByVerifyCode(String VerifyCode);
 
-    User login(String username , String password ,String VerifyCode);
+    User login(String username, String password, String VerifyCode);
 }  

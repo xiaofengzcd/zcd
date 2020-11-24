@@ -25,9 +25,6 @@ public class GitTest {
      * git add .
      * git commit -m "提交内容介绍"
      * git push
-     * xiaofengzcd
-     * wazl512zcd
-     *
      *
      * @link https://www.cnblogs.com/shenchanghui/p/7184101.html  参考链接
      *
@@ -57,7 +54,6 @@ public class GitTest {
    public void git(){
        System.out.println("测试git有无反应");
        System.out.println("再测试一次");
-
    }
 
 }

@@ -4,8 +4,6 @@ import com.zcd.model.Shop;
 import com.zcd.model.User;
 import com.zcd.service.ShopService;
 import com.zcd.service.VisitorService;
-import com.zcd.util.JsonUtil;
-import com.zcd.util.VerifyCodeUtils;
 import com.zcd.zcdutil.JsonUtilzcd;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -32,7 +30,7 @@ public class ShopController {
 
     @RequestMapping(value = "/index",produces = "application/json;charset=utf-8")
     public String index(@RequestBody String recommend){
-        recommend = "F";
+        recommend = "Y";
         List<Shop> index = shopService.index(recommend);
         System.out.println(index);
 

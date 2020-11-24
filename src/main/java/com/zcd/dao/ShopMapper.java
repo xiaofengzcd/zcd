@@ -13,6 +13,6 @@ import java.util.List;
 public interface ShopMapper {
     List<Shop> index(String recommend);
 
-    List<User> login(String user_name , String password );
+    List<User> login(String user_name, String password);
 
 }

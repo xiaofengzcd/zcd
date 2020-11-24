@@ -23,5 +23,5 @@ public interface IUserDao {
 
 
     // 不止一个参数的记得加个@param注解,别问,问就是不知道,加上去就对了,不会有人说你写错了的
-    User login(@Param("username")String username , @Param("password")String password , @Param("VerifyCode")String VerifyCode );
+    User login(@Param("username") String username, @Param("password") String password, @Param("VerifyCode") String VerifyCode);
 }

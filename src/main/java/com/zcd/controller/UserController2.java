@@ -1,13 +1,11 @@
 package com.zcd.controller;
 
+
 import com.zcd.abstracts.AbstractBaseController;
-import com.zcd.base.BaseEntity;
 import com.zcd.dto.BaseResult;
-import com.zcd.model.TbUser;
 import com.zcd.model.User;
 import com.zcd.service.IUserService;
-import com.zcd.service.ShopService;
-import com.zcd.service.TbUserService;
+
 import com.zcd.util.VerifyCodeUtils;
 import com.zcd.zcdutil.JsonUtilzcd;
 import org.apache.shiro.SecurityUtils;
@@ -24,107 +22,86 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.enterprise.deploy.spi.DeploymentConfiguration;
 
- /**
-      * @author zcd
-      * @description: description
-      * @create 2020/10/27
-      */
+/**
+*
+ * @author zcd
+ * @description: description
+ * @create 2020/10/27
+*/
 @RestController
 @RequestMapping("/user2")
-public class UserController2 extends AbstractBaseController<TbUser, TbUserService> {
+public class UserController2
+ {
 
-     @Autowired
-     private IUserService userService;
+    @Autowired
+    private IUserService userService;
 
     @RequestMapping("/test")
     public String test(){
         return JsonUtilzcd.getJson("CESHI");
     }
 
-    /**
-     * 保存用户信息
+
+/**
+     * 我这里name 传英文字符串的话,是可以正常查询的,但如果name是中文的字符串,
+     * 查出来的结果是个中括号,debug显示list里size为0,但是却不为null,
+     * (如果是null的话,结果会是提示没这个人)
+     * 初步得出结论,
+     * 1.英文行,中文不行
+     * 解决: url=jdbc:mysql://localhost:3306/zcx?useUnicode=true&characterEncoding
+     * =utf8&characterSetResults=utf8
+     * 原项目里的jdbc.properties文件里缺失关于字符编码的配置(坑逼啊!)
      *
-     * @param tbUser
-     * @return
+     *
+     * 2.即便查不到,这个list为空好像也不为null,暂且使用user.size() == 0作为判断条件代替
+     *
+     * list为空和null的区别,参考下面链接,这里虽然没查到东西,但list还是在的
+     * 因此可用 isEmpty 或者 size等方法判断
+     * @link https://www.cnblogs.com/linjiaxin/p/6104214.html
+     *
      */
 
-    @RequestMapping(value = "save", method = RequestMethod.POST)
-    @Override
-    public String save(@RequestParam(defaultValue = "",required = false) TbUser tbUser, Model model, RedirectAttributes redirectAttributes) {
-        BaseResult baseResult = service.save(tbUser);
-
-        // 保存成功
-        if (baseResult.getStatus() == 200) {
-            redirectAttributes.addFlashAttribute("baseResult", baseResult);
-            return JsonUtilzcd.getJson(baseResult);
-        }
-
-        // 保存失败
-        else {
-            model.addAttribute("baseResult", baseResult);
-           return JsonUtilzcd.getJson(baseResult.getStatus());
-        }
-    }
-
-
-     /**
-      * 我这里name 传英文字符串的话,是可以正常查询的,但如果name是中文的字符串,
-      * 查出来的结果是个中括号,debug显示list里size为0,但是却不为null,
-      * (如果是null的话,结果会是提示没这个人)
-      * 初步得出结论,
-      * 1.英文行,中文不行
-      * 解决: url=jdbc:mysql://localhost:3306/zcx?useUnicode=true&characterEncoding
-      * =utf8&characterSetResults=utf8
-      * 原项目里的jdbc.properties文件里缺失关于字符编码的配置(坑逼啊!)
-      *
-      *
-      * 2.即便查不到,这个list为空好像也不为null,暂且使用user.size() == 0作为判断条件代替
-      *
-      * list为空和null的区别,参考下面链接,这里虽然没查到东西,但list还是在的
-      * 因此可用 isEmpty 或者 size等方法判断
-      * @link https://www.cnblogs.com/linjiaxin/p/6104214.html
-      *
-      */
-
      //手动输入地址访问
+//http://localhost:8080/maven02_war_exploded/user2/login?username=root&password=123456&verifyCode=LDWCT
      @RequestMapping(value = "/login",produces = "application/json;charset=utf-8")
      public String login( @RequestParam(defaultValue = "root",required = false) String username,
                           @RequestParam(defaultValue = "123456",required = false) String password,
                           @RequestParam(defaultValue = "",required = false) String verifyCode
      ){
-         String verificationCode = VerifyCodeUtils.generateVerifyCode(5);
+         //String verificationCode = VerifyCodeUtils.generateVerifyCode(5);
          User user = userService.login(username,password,verifyCode);
          System.out.println(user);
-         System.out.println(verificationCode);
+   //      System.out.println(verificationCode);
 
-         if(user == null){
-             return JsonUtilzcd.getJson("用户名或者密码错误");
-         }
-         else if(!verifyCode.equals(verificationCode)){
-             return JsonUtilzcd.getJson("验证码错误");
-         }
-         else {
-             return JsonUtilzcd.getJson("登录成功");
-         }
+        if(user == null){
+            return JsonUtilzcd.getJson("用户名或者密码错误");
+        }
+        else if(!verifyCode.equals(user.getVerifyCode())){
+            return JsonUtilzcd.getJson("验证码错误");
+        }
+        else {
+            return JsonUtilzcd.getJson("登录成功");
+        }
+    }
 
-
-     }
-
-
-     @RequestMapping(value = "/login",produces = "application/json;charset=utf-8")
-     public String getVerifyCode(){
-         return JsonUtilzcd.getJson(VerifyCodeUtils.generateVerifyCode(5));
-     }
-
+@RequestMapping(value = "/getVerifyCode",produces = "application/json;charset=utf-8")
+    public String getVerifyCode(){
+        final String verificationCode = VerifyCodeUtils.generateVerifyCode(5);
+        userService.updateByVerifyCode(verificationCode);
+        return JsonUtilzcd.getJson(verificationCode);
+    }
 
 
-     /**
-          * @author zcd
-          * @description: 仅做测试shiro用
-          * @create 2020/10/27
-          */
-    @RequestMapping("/login")
-    public String login( String username ,  String password, Model model){
+
+
+/**
+     * @author zcd
+     * @description: 仅做测试shiro用
+     * @create 2020/10/27
+     */
+
+    @RequestMapping("/login3")
+    public String login3( String username ,  String password, Model model){
 
         username = "root";
         password = "123456";
@@ -144,26 +121,50 @@ public class UserController2 extends AbstractBaseController<TbUser, TbUserServic
 
     }
 
-
+     /**
+      * 保存用户信息
+      *@description:
+      * spring boot 报错 nested exception is java.lang.NoClassDefFoundError: javax/el/ELManager
+      * 删除tomcat目录下面 lib文件中的el-api.jar文件，重启服务即可
+      * 项目一直报bean注入失败,导致项目无法启动,将此段代码注释后仍旧是报注入失败,并导致旧有可运行的代码无法正常运行
+      * 不十分清楚原因何在,总之删掉tomcat的el-api.jar文件后,旧有代码可正常运行(一直正常运行的index.jsp挂掉了~~~~)
+      * 暂且注释掉该段代码,换个方向发展
+      * jsp挂掉,目测是 el-api.jar被删掉,里面的el表达式挂掉
+      * 不难看出是依赖冲突了,但至于为何以前不冲突,现在冲突,最近也没添加什么依赖
+      * 正解: (不用删tomcat的el jar包)添加依赖,降低hibernate版本和新增el-api依赖
+      * 将删除的代码还原,依旧报bean注入失败,将代码注释,依旧报错,删除,就不报了,可能是xml文件还会加载,搞不清楚
+     <dependency>
+     <groupId>org.hibernate</groupId>
+     <artifactId>hibernate-validator</artifactId>
+     <version>5.1.0.Final</version>
+     </dependency>
+     <dependency>
+     <groupId>javax.el</groupId>
+     <artifactId>javax.el-api</artifactId>
+     <version>2.2.4</version>
+     </dependency>
+      *
+      * @param tbUser
+      * @author zcd
+      * @create 2020/11/24
+      */
+/*@RequestMapping(value = "save", method = RequestMethod.POST)
     @Override
-    public String list() {
-        return null;
-    }
+    public String save(@RequestParam(defaultValue = "",required = false) TbUser tbUser, Model model, RedirectAttributes redirectAttributes) {
+        BaseResult baseResult = service.save(tbUser);
 
-    @Override
-    public String form() {
-        return null;
-    }
+        // 保存成功
+        if (baseResult.getStatus() == 200) {
+            redirectAttributes.addFlashAttribute("baseResult", baseResult);
+            return JsonUtilzcd.getJson(baseResult);
+        }
+
+        // 保存失败
+        else {
+            model.addAttribute("baseResult", baseResult);
+            return JsonUtilzcd.getJson(baseResult.getStatus());
+        }
+    }*/
 
 
-
-    @Override
-    public BaseResult delete(String ids) {
-        return null;
-    }
-
-    @Override
-    public String detail() {
-        return null;
-    }
-}
+ }
