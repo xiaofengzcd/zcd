@@ -3,19 +3,17 @@ package com.zcd.service.impl;
 import javax.annotation.Resource;
 
 
+import com.zcd.dao.UserDao;
+import com.zcd.service.UserService;
 import org.springframework.stereotype.Service;
 
-import com.zcd.dao.IUserDao;
 import com.zcd.model.User;
-import com.zcd.service.IUserService;
-
-import java.util.List;
 
 
 @Service("userService")
-public class UserServiceImpl implements IUserService {
+public class UserServiceImpl implements UserService {
     @Resource
-    private IUserDao userDao;
+    private UserDao userDao;
     
     public User getUserById(int userId) {
         // TODO Auto-generated method stub  

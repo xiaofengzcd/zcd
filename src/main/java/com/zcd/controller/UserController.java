@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.zcd.model.User;
-import com.zcd.service.IUserService;
+import com.zcd.service.UserService;
 
 
 @RestController
@@ -28,7 +28,7 @@ import com.zcd.service.IUserService;
 public class UserController {
     private static Logger log = LoggerFactory.getLogger(UserController.class);
     @Resource
-    private IUserService userService;
+    private UserService userService;
     
     // /user/test?id=1
     @RequestMapping(value = "/test", method = RequestMethod.GET)

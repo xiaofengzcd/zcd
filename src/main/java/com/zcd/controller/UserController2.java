@@ -1,11 +1,9 @@
 package com.zcd.controller;
 
 
-import com.zcd.abstracts.AbstractBaseController;
-import com.zcd.dto.BaseResult;
 import com.zcd.model.User;
-import com.zcd.service.IUserService;
 
+import com.zcd.service.UserService;
 import com.zcd.util.VerifyCodeUtils;
 import com.zcd.zcdutil.JsonUtilzcd;
 import org.apache.shiro.SecurityUtils;
@@ -15,12 +13,8 @@ import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-
-import javax.enterprise.deploy.spi.DeploymentConfiguration;
 
 /**
 *
@@ -34,7 +28,7 @@ public class UserController2
  {
 
     @Autowired
-    private IUserService userService;
+    private UserService userService;
 
     @RequestMapping("/test")
     public String test(){
