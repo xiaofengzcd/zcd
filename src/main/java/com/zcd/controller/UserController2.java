@@ -1,24 +1,25 @@
 package com.zcd.controller;
 
 
+import com.zcd.dto.BaseResult;
 import com.zcd.model.User;
 
 import com.zcd.service.UserService;
 import com.zcd.util.VerifyCodeUtils;
 import com.zcd.zcdutil.JsonUtilzcd;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.UnknownAccountException;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.util.Date;
 
 /**
 *
@@ -70,7 +71,6 @@ public class UserController2
      User user = userService.login(username,password,verifyCode);
      System.out.println(user);
      //      System.out.println(verificationCode);
-
      if(user == null){
          return JsonUtilzcd.getJson("用户名或者密码错误");
      }
@@ -90,27 +90,28 @@ public class UserController2
     }
 
 
+
+     /**
+      * @author zcd
+      * @description: addUser
+      * @create 2020/11/30
+      */
      @RequestMapping(value = "/add",produces = "application/json;charset=utf-8")
-     public String add(
-                        @RequestParam(required = false) User user
+     public String add(@RequestParam(required = false) User user
      ) throws FileNotFoundException {
          user = new User();
          user.setUsername("王二小");
          user.setPassword("root");
          user.setAge(22);
-
          if(user != null && !user.getUsername().equals("")
                  && !user.getPassword().equals("")
                  && user.getAge()!= null) {
-
-
               //网上的说法是不要把图片放数据库,把图片存服务器上 ,然后数据库存图片地址
              /*File file = new File("C:\\Users\\Administrator\\Desktop\\demo.png");
              FileInputStream input = new FileInputStream(file);
              user.setHeadImage(input);*/
              user.setVerifyCode("LDWCT");
-
-
+             user.setCreateDatetime(new Date());
            //  我这里原先是想着获取用户的信息然后传到mapper里去查询的,,结果一直跑不通,后来参考别人的代码
              //发现其实传个user对象就行了, mapper那里是能获取到用户的信息的
              // 前面跑不通的原因我估计是 mapper的参数类型是user 而我传的是具体的用户信息,定义的是string和int
@@ -118,14 +119,58 @@ public class UserController2
              System.out.println(user);
              return JsonUtilzcd.getJson("添加成功");
          }else {
-             return JsonUtilzcd.getJson("添加失败");
+             return JsonUtilzcd.getJson("添加失败,请检查信息是否填写完整");
          }
-         //      System.out.println(verificationCode);
-
      }
 
+         /**
+              * @author zcd
+              * @description: 删除,实际应为post请求,但我这种手输url的好像都是get请求
+              * @create 2020/11/30
+              */
 
-/**
+     @RequestMapping(value = "delete", method = RequestMethod.GET)
+     public BaseResult delete(@RequestParam(required = false) String ids) {
+        // ids= "7";
+         BaseResult baseResult = null;
+         if (StringUtils.isNotBlank(ids)) {
+             String[] idArray = ids.split(",");
+             userService.deleteMulti(idArray);
+             baseResult = BaseResult.success("删除用户成功");
+         } else {
+             baseResult = BaseResult.fail("删除用户失败");
+         }
+         return baseResult;
+     }
+
+//http://localhost:8080/maven02_war_exploded/user2/save
+     @RequestMapping(value = "save", method = RequestMethod.GET)
+    public BaseResult save(@RequestParam(required = false) User user) {
+    //  这种模拟的请求需要new对象 如果是前端传过来的则不需要
+         user = new User();
+         user.setUsername("王四小");
+         user.setPassword("root123");
+         user.setAge(22);
+         user.setId(6L);
+
+        BaseResult baseResult = userService.save(user);
+
+        // 保存成功
+        if (baseResult.getStatus() == 200) {
+
+            return baseResult;
+        }
+
+        // 保存失败
+        else {
+
+            return baseResult;
+        }
+    }
+
+
+
+     /**
      * @author zcd
      * @description: 仅做测试shiro用
      * @create 2020/10/27
@@ -148,8 +193,6 @@ public class UserController2
         }catch (UnknownAccountException e){
             return JsonUtilzcd.getJson("失败");
         }
-
-
     }
 
      /**

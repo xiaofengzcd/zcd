@@ -12,7 +12,32 @@ public interface UserDao {
     
     void insert(User user/*@Param("username")String username, @Param("password")String password, @Param("age")int age,
                @Param("VerifyCode")String VerifyCode*/);
-    
+
+    /**
+     * 批量删除
+     *
+     * @param ids
+     */
+    void deleteMulti(String[] ids);
+
+
+    /**
+     * 根据 ID 查询信息
+     *
+     * @param id
+     * @return
+     */
+    User getById(Long id);
+
+
+    /**
+     * 更新
+     *
+     * @param
+     */
+    void update(User user);
+
+
     int insertSelective(User record);
     
     User selectByPrimaryKey(Integer id);

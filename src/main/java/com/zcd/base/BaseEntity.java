@@ -1,5 +1,10 @@
 package com.zcd.base;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
+
 import java.io.Serializable;
 import java.util.Date;
 
@@ -8,36 +13,19 @@ import java.util.Date;
  * <p>Title: BaseEntity</p>
  * <p>Description: </p>
  *
- * @author Lusifer
+ * @author zcd
  * @version 1.0.0
- * @date 2018/6/21 15:28
+ * @date 2020/11/30 15:28
  */
+
+
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 public abstract class BaseEntity implements Serializable {
+    private static final long serialVersionUID = -4438184833567586456L;
     private Long id;
-    private Date created;
-    private Date updated;
+    private Date createDatetime;
+    private Date modifyDatetime;
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public Date getCreated() {
-        return created;
-    }
-
-    public void setCreated(Date created) {
-        this.created = created;
-    }
-
-    public Date getUpdated() {
-        return updated;
-    }
-
-    public void setUpdated(Date updated) {
-        this.updated = updated;
-    }
 }

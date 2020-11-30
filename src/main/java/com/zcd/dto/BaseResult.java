@@ -7,9 +7,9 @@ import java.io.Serializable;
  * <p>Title: BaseResult</p>
  * <p>Description: </p>
  *
- * @author Lusifer
+ * @author zcd
  * @version 1.0.0
- * @date 2018/6/19 14:31
+ * @date 2020/11/19 14:31
  */
 public class BaseResult implements Serializable {
     public static final int STATUS_SUCCESS = 200;
