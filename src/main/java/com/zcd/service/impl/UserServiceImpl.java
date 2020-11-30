@@ -9,6 +9,8 @@ import org.springframework.stereotype.Service;
 
 import com.zcd.model.User;
 
+import java.io.InputStream;
+
 
 @Service("userService")
 public class UserServiceImpl implements UserService {
@@ -33,6 +35,11 @@ public class UserServiceImpl implements UserService {
     @Override
     public User login(String username, String password,String VerifyCode) {
         return userDao.login( username,  password, VerifyCode);
+    }
+
+    @Override
+    public void insert(User user/*String username, String password, int age, String VerifyCode*/) {
+        userDao.insert(user /*username,password,age,VerifyCode*/);
     }
 
 }  

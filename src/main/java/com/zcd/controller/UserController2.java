@@ -16,6 +16,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+
 /**
 *
  * @author zcd
@@ -58,25 +62,25 @@ public class UserController2
      //手动输入地址访问
 //http://localhost:8080/maven02_war_exploded/user2/login?username=root&password=123456&verifyCode=LDWCT
      @RequestMapping(value = "/login",produces = "application/json;charset=utf-8")
-     public String login( @RequestParam(defaultValue = "root",required = false) String username,
-                          @RequestParam(defaultValue = "123456",required = false) String password,
-                          @RequestParam(defaultValue = "",required = false) String verifyCode
-     ){
-         //String verificationCode = VerifyCodeUtils.generateVerifyCode(5);
-         User user = userService.login(username,password,verifyCode);
-         System.out.println(user);
-   //      System.out.println(verificationCode);
+ public String login( @RequestParam(defaultValue = "root",required = false) String username,
+                      @RequestParam(defaultValue = "123456",required = false) String password,
+                      @RequestParam(defaultValue = "",required = false) String verifyCode
+ ){
+     //String verificationCode = VerifyCodeUtils.generateVerifyCode(5);
+     User user = userService.login(username,password,verifyCode);
+     System.out.println(user);
+     //      System.out.println(verificationCode);
 
-        if(user == null){
-            return JsonUtilzcd.getJson("用户名或者密码错误");
-        }
-        else if(!verifyCode.equals(user.getVerifyCode())){
-            return JsonUtilzcd.getJson("验证码错误");
-        }
-        else {
-            return JsonUtilzcd.getJson("登录成功");
-        }
-    }
+     if(user == null){
+         return JsonUtilzcd.getJson("用户名或者密码错误");
+     }
+     else if(!verifyCode.equals(user.getVerifyCode())){
+         return JsonUtilzcd.getJson("验证码错误");
+     }
+     else {
+         return JsonUtilzcd.getJson("登录成功");
+     }
+ }
 
 @RequestMapping(value = "/getVerifyCode",produces = "application/json;charset=utf-8")
     public String getVerifyCode(){
@@ -86,6 +90,39 @@ public class UserController2
     }
 
 
+     @RequestMapping(value = "/add",produces = "application/json;charset=utf-8")
+     public String add(
+                        @RequestParam(required = false) User user
+     ) throws FileNotFoundException {
+         user = new User();
+         user.setUsername("王二小");
+         user.setPassword("root");
+         user.setAge(22);
+
+         if(user != null && !user.getUsername().equals("")
+                 && !user.getPassword().equals("")
+                 && user.getAge()!= null) {
+
+
+              //网上的说法是不要把图片放数据库,把图片存服务器上 ,然后数据库存图片地址
+             /*File file = new File("C:\\Users\\Administrator\\Desktop\\demo.png");
+             FileInputStream input = new FileInputStream(file);
+             user.setHeadImage(input);*/
+             user.setVerifyCode("LDWCT");
+
+
+           //  我这里原先是想着获取用户的信息然后传到mapper里去查询的,,结果一直跑不通,后来参考别人的代码
+             //发现其实传个user对象就行了, mapper那里是能获取到用户的信息的
+             // 前面跑不通的原因我估计是 mapper的参数类型是user 而我传的是具体的用户信息,定义的是string和int
+             userService.insert(user /*user.getUsername(), user.getPassword(), user.getAge(), user.getVerifyCode()*/);
+             System.out.println(user);
+             return JsonUtilzcd.getJson("添加成功");
+         }else {
+             return JsonUtilzcd.getJson("添加失败");
+         }
+         //      System.out.println(verificationCode);
+
+     }
 
 
 /**

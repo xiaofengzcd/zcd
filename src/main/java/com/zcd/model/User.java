@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.io.InputStream;
 import java.io.Serializable;
 
 
@@ -22,6 +23,9 @@ public class User implements Serializable {
     
     private Integer age;
     private String VerifyCode;
+
+
+    /*private InputStream headImage;*/
 
     
 }

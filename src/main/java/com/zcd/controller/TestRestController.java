@@ -1,7 +1,6 @@
 package com.zcd.controller;
 
 import com.zcd.model.Girl;
-import com.zcd.service.GirlService;
 import com.zcd.service.TestService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
@@ -54,14 +53,5 @@ public class TestRestController {
         return "test";
     }
 
-    @Autowired
-    private GirlService girlService;
 
-    @RequestMapping("/test")
-    public Girl test(
-            @RequestParam int id ,Model model) {
-        id = 2;
-
-        return this.girlService.getGirlById(id);
-    }
 }

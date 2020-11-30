@@ -7,6 +7,7 @@
     <result column="password" property="password" jdbcType="VARCHAR"/>
     <result column="age" property="age" jdbcType="INTEGER"/>
     <result column="VerifyCode" property="VerifyCode" jdbcType="VARCHAR"/>
+<!--    <result column="headImage" property="headImage" jdbcType="BLOB"/>-->
   </resultMap>
 
 
@@ -31,6 +32,33 @@
     update user
     set VerifyCode = #{VerifyCode,jdbcType=VARCHAR}
   </update>
+
+
+  <insert id="insert" parameterType="com.zcd.model.User">
+    insert into user (username, password,age,VerifyCode
+                        )
+    values (#{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, #{age,jdbcType=INTEGER},
+            #{VerifyCode,jdbcType=VARCHAR})
+  </insert>
+
+  <!--copy过来的伪代码,意思就是: 先查t1表和t3表,然后把满足on后面条件的结果加入到t1表中
+    不满足的显示为null或者空,再把这表的结果集跟t2表左连接,即满足t2.paper_id=t3.paper_id
+    的数据加入到之前的结果集中,然后对三个表的查询结果集用where进行判断-->
+  <!--<select id="list" parameterType="java.lang.String" resultMap="ResultMap">
+      select
+          t1.*,
+          t2.paper_id,
+          t2.sort_no,
+          t2.sort_no_prefix,
+          t2.create_time,
+          t2.commit_time,
+          t2.paperStatus,
+          t2.paperName
+      from audit_report as t1 left join audit_report_paper as t3 on
+          t1.audit_report_id = t3.audit_report_id
+                              left join paper as t2 on t2.paper_id = t3.paper_id
+      where t1.status > 0 and t1.auditReportId = #{auditReportId,jdbcType=VARCHAR}
+  </select>-->
 
 
 

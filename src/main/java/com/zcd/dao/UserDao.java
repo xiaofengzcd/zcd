@@ -3,13 +3,15 @@ package com.zcd.dao;
 import com.zcd.model.User;
 import org.apache.ibatis.annotations.Param;
 
+import java.io.InputStream;
 import java.util.List;
 
 
 public interface UserDao {
     int deleteByPrimaryKey(Integer id);
     
-    int insert(User record);
+    void insert(User user/*@Param("username")String username, @Param("password")String password, @Param("age")int age,
+               @Param("VerifyCode")String VerifyCode*/);
     
     int insertSelective(User record);
     
