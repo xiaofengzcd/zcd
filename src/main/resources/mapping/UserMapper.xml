@@ -40,7 +40,7 @@
     insert into user (username, password,age,VerifyCode,create_datetime
                         )
 
-    values (#{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, #{age,jdbcType=INTEGER},
+    values (#{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR},#{age,jdbcType=INTEGER},
             #{VerifyCode,jdbcType=VARCHAR},#{createDatetime})
   </insert>
 

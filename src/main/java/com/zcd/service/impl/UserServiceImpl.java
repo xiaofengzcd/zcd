@@ -24,7 +24,6 @@ public class UserServiceImpl implements UserService {
     private UserDao userDao;
     
     public User getUserById(int userId) {
-        // TODO Auto-generated method stub  
         return this.userDao.selectByPrimaryKey(userId);
     }
 
@@ -88,7 +87,6 @@ public class UserServiceImpl implements UserService {
                 }
                 update(user);
             }
-
             return BaseResult.success("保存用户信息成功");
         /*}*/
     }

@@ -14,6 +14,7 @@ import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
+import org.springframework.util.DigestUtils;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.File;
@@ -61,16 +62,16 @@ public class UserController2
      */
 
      //手动输入地址访问
-//http://localhost:8080/maven02_war_exploded/user2/login?username=root&password=123456&verifyCode=LDWCT
+//http://localhost:8080/maven02_war_exploded/user2/login?username=root&psw=123456&verifyCode=LDWCT
      @RequestMapping(value = "/login",produces = "application/json;charset=utf-8")
  public String login( @RequestParam(defaultValue = "root",required = false) String username,
-                      @RequestParam(defaultValue = "123456",required = false) String password,
+                      @RequestParam(defaultValue = "123456",required = false) String psw,
                       @RequestParam(defaultValue = "",required = false) String verifyCode
  ){
-     //String verificationCode = VerifyCodeUtils.generateVerifyCode(5);
+       //后续新增的密码是md5加密后的 ,这种密码我也不知道是多少,,,因此无法模拟...
+       String password =  DigestUtils.md5DigestAsHex(psw.getBytes());
      User user = userService.login(username,password,verifyCode);
      System.out.println(user);
-     //      System.out.println(verificationCode);
      if(user == null){
          return JsonUtilzcd.getJson("用户名或者密码错误");
      }
@@ -93,7 +94,7 @@ public class UserController2
 
      /**
       * @author zcd
-      * @description: addUser
+      * @description: addUser  这个方法添加的用户密码是没加密的,后面的save方法中有改进
       * @create 2020/11/30
       */
      @RequestMapping(value = "/add",produces = "application/json;charset=utf-8")
@@ -122,36 +123,21 @@ public class UserController2
              return JsonUtilzcd.getJson("添加失败,请检查信息是否填写完整");
          }
      }
-
          /**
               * @author zcd
-              * @description: 删除,实际应为post请求,但我这种手输url的好像都是get请求
-              * @create 2020/11/30
+              * @description: 这个方法包含了新增和修改用户,是上面addUser的改进版
+              * @create 2020/12/1
               */
-
-     @RequestMapping(value = "delete", method = RequestMethod.GET)
-     public BaseResult delete(@RequestParam(required = false) String ids) {
-        // ids= "7";
-         BaseResult baseResult = null;
-         if (StringUtils.isNotBlank(ids)) {
-             String[] idArray = ids.split(",");
-             userService.deleteMulti(idArray);
-             baseResult = BaseResult.success("删除用户成功");
-         } else {
-             baseResult = BaseResult.fail("删除用户失败");
-         }
-         return baseResult;
-     }
-
 //http://localhost:8080/maven02_war_exploded/user2/save
      @RequestMapping(value = "save", method = RequestMethod.GET)
     public BaseResult save(@RequestParam(required = false) User user) {
     //  这种模拟的请求需要new对象 如果是前端传过来的则不需要
          user = new User();
-         user.setUsername("王四小");
+         user.setUsername("王六小");
          user.setPassword("root123");
          user.setAge(22);
-         user.setId(6L);
+        // user.setId(6L);
+
 
         BaseResult baseResult = userService.save(user);
 
@@ -167,6 +153,27 @@ public class UserController2
             return baseResult;
         }
     }
+
+
+     /**
+      * @author zcd
+      * @description: 删除,实际应为post请求,但我这种手输url的好像都是get请求
+      * @create 2020/11/30
+      */
+
+     @RequestMapping(value = "delete", method = RequestMethod.GET)
+     public BaseResult delete(@RequestParam(required = false) String ids) {
+         // ids= "7";
+         BaseResult baseResult = null;
+         if (StringUtils.isNotBlank(ids)) {
+             String[] idArray = ids.split(",");
+             userService.deleteMulti(idArray);
+             baseResult = BaseResult.success("删除用户成功");
+         } else {
+             baseResult = BaseResult.fail("删除用户失败");
+         }
+         return baseResult;
+     }
 
 
 
@@ -198,7 +205,7 @@ public class UserController2
      /**
       * 保存用户信息
       *@description:
-      * spring boot 报错 nested exception is java.lang.NoClassDefFoundError: javax/el/ELManager
+      * spring  报错 nested exception is java.lang.NoClassDefFoundError: javax/el/ELManager
       * 删除tomcat目录下面 lib文件中的el-api.jar文件，重启服务即可
       * 项目一直报bean注入失败,导致项目无法启动,将此段代码注释后仍旧是报注入失败,并导致旧有可运行的代码无法正常运行
       * 不十分清楚原因何在,总之删掉tomcat的el-api.jar文件后,旧有代码可正常运行(一直正常运行的index.jsp挂掉了~~~~)
@@ -224,18 +231,16 @@ public class UserController2
       */
 /*@RequestMapping(value = "save", method = RequestMethod.POST)
     @Override
-    public String save(@RequestParam(defaultValue = "",required = false) TbUser tbUser, Model model, RedirectAttributes redirectAttributes) {
+    public String save(@RequestParam(defaultValue = "",required = false) TbUser tbUser) {
         BaseResult baseResult = service.save(tbUser);
 
         // 保存成功
         if (baseResult.getStatus() == 200) {
-            redirectAttributes.addFlashAttribute("baseResult", baseResult);
             return JsonUtilzcd.getJson(baseResult);
         }
 
         // 保存失败
         else {
-            model.addAttribute("baseResult", baseResult);
             return JsonUtilzcd.getJson(baseResult.getStatus());
         }
     }*/

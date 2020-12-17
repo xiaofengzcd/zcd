@@ -4,12 +4,10 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
 /**
- import java.security.MessageDigest;
- import java.security.NoSuchAlgorithmException;
 
  /**
  * 描述 MD5加密
- * @author bin
+ * @author zcd
  * @date 2019-08-02
  **/
 class MD5Utils {

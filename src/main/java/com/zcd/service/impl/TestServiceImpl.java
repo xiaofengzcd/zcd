@@ -53,7 +53,7 @@ public class TestServiceImpl implements TestService {
     
     @Override
     //此注解标记在实现类上,不可有参数,不可有返回值
-    //@Scheduled(fixedRate = 3000)  //这个是在上一个任务执行完后等3s执行一次
+   // @Scheduled(fixedRate = 3000)  //这个是在上一个任务执行完后等3s执行一次
     //@Scheduled(fixedDelay=5000)   这个是在上一个任务执行   后等5s执行一次
     public  void testScheduled(/*int args*/) throws InterruptedException {
         String code = null;
