@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zcd.dao.GoodsMapper">
+    <resultMap id="BaseResultMap" type="com.zcd.model.Goods">
+        <id column="id" property="id" jdbcType="BIGINT"/>
+        <result column="name" property="name" jdbcType="VARCHAR"/>
+        <result column="description" property="description" jdbcType="VARCHAR"/>
+        <result column="detail" property="detail" jdbcType="VARCHAR"/>
+    </resultMap>
+
+
+    <select id="index" resultMap="BaseResultMap" parameterType="java.lang.String">
+        select
+            *
+        from goods
+        where name like concat('%',#{name},'%')
+    </select>
+
+    <select id="login" parameterType="String" resultMap="BaseResultMap">
+        select *
+        from user
+        where
+        username = #{username,jdbcType=VARCHAR}
+        AND password = #{password,jdbcType=VARCHAR};
+        <!--<if test="username!=null and username!=''">username = #{username,jdbcType=VARCHAR}</if>
+        <if test="password!=null and password!=''">AND password = #{password,jdbcType=VARCHAR};</if>-->
+    </select>
+
+    <update id="updateByVerifyCode" parameterType="com.zcd.model.User">
+        update user
+        set VerifyCode = #{VerifyCode,jdbcType=VARCHAR}
+    </update>
+
+
+    <insert id="insert" parameterType="com.zcd.model.User">
+        insert into user (username, password,age,VerifyCode,create_datetime
+        )
+
+        values (#{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR},#{age,jdbcType=INTEGER},
+                #{VerifyCode,jdbcType=VARCHAR},#{createDatetime})
+    </insert>
+
+    <delete id="deleteMulti">
+        DELETE FROM user
+        WHERE id IN
+        <foreach collection="array" open="(" close=")" separator="," item="id">
+            #{id}
+        </foreach>
+    </delete>
+
+    <select id="getById" resultType="com.zcd.model.User">
+        SELECT
+            *
+        FROM
+            user AS a
+        WHERE
+            a.id = #{id}
+    </select>
+
+
+
+    <update id="update">
+        UPDATE
+            user
+        SET
+            username = #{username},
+            password = #{password},
+            age = #{age},
+            modify_datetime = #{modifyDatetime}
+        WHERE id = #{id}
+    </update>
+
+
+</mapper>

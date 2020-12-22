@@ -1,5 +1,7 @@
 package com.zcd.controller;
 
+import com.zcd.dto.BaseResult;
+import com.zcd.model.Goods;
 import com.zcd.model.Shop;
 import com.zcd.model.User;
 import com.zcd.service.ShopService;
@@ -37,6 +39,9 @@ public class ShopController {
 
         return JsonUtilzcd.getJson(index);
     }
+
+
+
 
 
 
