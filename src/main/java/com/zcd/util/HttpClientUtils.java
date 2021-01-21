@@ -18,7 +18,7 @@ import java.util.Arrays;
  * <p>Title: HttpClientUtils</p>
  * <p>Description: </p>
  *
- * @author Lusifer
+ * @author zcd
  * @version 1.0.0
  * @date 2018/7/4 14:04
  */

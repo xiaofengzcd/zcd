@@ -30,10 +30,10 @@ public class BaseResult implements Serializable {
     public static BaseResult success(String message, Object data) {
         return BaseResult.createResult(STATUS_SUCCESS, message, data);
     }
-
+/*
     public static BaseResult success(Object data) {
         return BaseResult.createResult(STATUS_SUCCESS,null, data);
-    }
+    }*/
 
     public static BaseResult fail() {
         return BaseResult.createResult(STATUS_FAIL, "失败", null);

@@ -33,6 +33,10 @@ public class GoodsController {
         // BaseResult baseResult = null;
         List<Goods> goods = goodsService.index(keyword);
 
-        return  BaseResult.success(goods);
+        if (goods != null  && goods.size() != 0 || keyword.equals("")){
+            return  BaseResult.success(null,goods);
+        }
+           else {
+        return  BaseResult.success("找不到您要的商品");}
     }
 }

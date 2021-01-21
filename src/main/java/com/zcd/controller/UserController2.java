@@ -149,7 +149,7 @@ public class UserController2
 
         // 保存失败
         else {
-
+            baseResult.setStatus(500);
             return baseResult;
         }
     }

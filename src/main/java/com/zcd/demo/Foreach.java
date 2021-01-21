@@ -19,7 +19,7 @@ public class Foreach {
        list.add("4,5,6");
        list.add("7");
 
-       "unknow".equalsIgnoreCase(name); // string专属的equals方法,参数和对象都只能是string
+       "unKnow".equalsIgnoreCase(name); // string专属的equals方法,参数和对象都只能是string
         /*
         这个target出了这个for循环就失效了,但每次循环,都是list把值
         给了target的,因此,可在循环体里,对这个target进行利用,循环结束,target失效

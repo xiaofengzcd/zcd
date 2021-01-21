@@ -9,7 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
  * <p>Title: EmailSendUtils</p>
  * <p>Description: </p>
  *
- * @author Lusifer
+ * @author zcd
  * @version 1.0.0
  * @date 2018/7/6 15:35
  */
