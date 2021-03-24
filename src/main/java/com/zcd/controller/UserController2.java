@@ -133,7 +133,7 @@ public class UserController2
     public BaseResult save(@RequestParam(required = false) User user) {
     //  这种模拟的请求需要new对象 如果是前端传过来的则不需要
          user = new User();
-         user.setUsername("王六小");
+         user.setUsername("王七打");
          user.setPassword("root123");
          user.setAge(22);
         // user.setId(6L);
@@ -158,6 +158,7 @@ public class UserController2
      /**
       * @author zcd
       * @description: 删除,实际应为post请求,但我这种手输url的好像都是get请求
+      * 像那种打勾删除的 ,前端可以定义一个 var = id 将选择的id传进来
       * @create 2020/11/30
       */
 

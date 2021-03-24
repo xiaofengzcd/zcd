@@ -15,6 +15,12 @@
   <mvc:annotation-driven/>
   <!-- 静态资源处理  css js imgs -->
 
+  <!-- 配置 Bean Validator 定义 -->
+  <bean id="validator" class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean"/>
+  <bean id="beanValidator" class="com.zcd.validator.BeanValidator">
+    <property name="validator" ref="validator" />
+  </bean>
+
 
   <!--避免IE执行AJAX时，返回JSON出现下载文件 -->
   <bean id="mappingJacksonHttpMessageConverter"

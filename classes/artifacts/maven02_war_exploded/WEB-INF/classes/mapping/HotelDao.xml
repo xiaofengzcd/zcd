@@ -1,0 +1,586 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zcd.dao.HotelDao">
+
+    <resultMap type="com.zcd.model.Hotel" id="HotelMap">
+        <result property="hotelGroupId" column="hotel_group_id" jdbcType="INTEGER"/>
+        <result property="id" column="id" jdbcType="INTEGER"/>
+        <result property="code" column="code" jdbcType="VARCHAR"/>
+        <result property="sta" column="sta" jdbcType="VARCHAR"/>
+        <result property="audit" column="audit" jdbcType="VARCHAR"/>
+        <result property="descript" column="descript" jdbcType="VARCHAR"/>
+        <result property="descriptEn" column="descript_en" jdbcType="VARCHAR"/>
+        <result property="descriptShort" column="descript_short" jdbcType="VARCHAR"/>
+        <result property="country" column="country" jdbcType="VARCHAR"/>
+        <result property="city" column="city" jdbcType="VARCHAR"/>
+        <result property="address1" column="address1" jdbcType="VARCHAR"/>
+        <result property="address2" column="address2" jdbcType="VARCHAR"/>
+        <result property="phone" column="phone" jdbcType="VARCHAR"/>
+        <result property="fax" column="fax" jdbcType="VARCHAR"/>
+        <result property="phoneRsv" column="phone_rsv" jdbcType="VARCHAR"/>
+        <result property="website" column="website" jdbcType="VARCHAR"/>
+        <result property="email" column="email" jdbcType="VARCHAR"/>
+        <result property="dns" column="dns" jdbcType="VARCHAR"/>
+        <result property="remark" column="remark" jdbcType="VARCHAR"/>
+        <result property="logo" column="logo" jdbcType="OTHER"/>
+        <result property="photo" column="photo" jdbcType="VARCHAR"/>
+        <result property="htmlInfo" column="html_info" jdbcType="VARCHAR"/>
+        <result property="listOrder" column="list_order" jdbcType="OTHER"/>
+        <result property="createUser" column="create_user" jdbcType="VARCHAR"/>
+        <result property="createDatetime" column="create_datetime" jdbcType="TIMESTAMP"/>
+        <result property="modifyUser" column="modify_user" jdbcType="VARCHAR"/>
+        <result property="modifyDatetime" column="modify_datetime" jdbcType="TIMESTAMP"/>
+        <result property="provinceCode" column="province_code" jdbcType="VARCHAR"/>
+        <result property="cityCode" column="city_code" jdbcType="VARCHAR"/>
+        <result property="districtCode" column="district_code" jdbcType="VARCHAR"/>
+        <result property="townCode" column="town_code" jdbcType="VARCHAR"/>
+        <result property="shoppingDistrictCode" column="shopping_district_code" jdbcType="VARCHAR"/>
+        <result property="scenicSpotCode" column="scenic_spot_code" jdbcType="VARCHAR"/>
+        <result property="bookListOrder" column="book_list_order" jdbcType="VARCHAR"/>
+        <result property="startLevelCode" column="start_level_code" jdbcType="VARCHAR"/>
+        <result property="brandCode" column="brand_code" jdbcType="VARCHAR"/>
+        <result property="score" column="score" jdbcType="VARCHAR"/>
+        <result property="categoryCode" column="category_code" jdbcType="VARCHAR"/>
+        <result property="manageType" column="manage_type" jdbcType="VARCHAR"/>
+        <result property="mapHtml" column="map_html" jdbcType="VARCHAR"/>
+        <result property="pairPic" column="pair_pic" jdbcType="VARCHAR"/>
+        <result property="appType" column="app_type" jdbcType="VARCHAR"/>
+        <result property="clientType" column="client_type" jdbcType="VARCHAR"/>
+        <result property="clientVersion" column="client_version" jdbcType="VARCHAR"/>
+        <result property="onlineCheck" column="online_check" jdbcType="VARCHAR"/>
+        <result property="area1" column="area1" jdbcType="VARCHAR"/>
+        <result property="area2" column="area2" jdbcType="VARCHAR"/>
+        <result property="serverName" column="server_name" jdbcType="VARCHAR"/>
+        <result property="decorationDate" column="decoration_date" jdbcType="TIMESTAMP"/>
+        <result property="openDate" column="open_date" jdbcType="TIMESTAMP"/>
+        <result property="hotelPolicy" column="hotel_policy" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <!--查询单个-->
+    <select id="queryById" resultMap="HotelMap">
+        select hotel_group_id,
+               id,
+               code,
+               sta,
+               audit,
+               descript,
+               descript_en,
+               descript_short,
+               country,
+               city,
+               address1,
+               address2,
+               phone,
+               fax,
+               phone_rsv,
+               website,
+               email,
+               dns,
+               remark,
+               logo,
+               photo,
+               html_info,
+               list_order,
+               create_user,
+               create_datetime,
+               modify_user,
+               modify_datetime,
+               province_code,
+               city_code,
+               district_code,
+               town_code,
+               shopping_district_code,
+               scenic_spot_code,
+               book_list_order,
+               start_level_code,
+               brand_code,
+               score,
+               category_code,
+               manage_type,
+               map_html,
+               pair_pic,
+               app_type,
+               client_type,
+               client_version,
+               online_check,
+               area1,
+               area2,
+               server_name,
+               decoration_date,
+               open_date,
+               hotel_policy
+        from zcx.hotel
+        where id = #{id}
+    </select>
+
+    <!--查询指定行数据-->
+    <select id="queryAllByLimit" resultMap="HotelMap">
+        select hotel_group_id,
+               id,
+               code,
+               sta,
+               audit,
+               descript,
+               descript_en,
+               descript_short,
+               country,
+               city,
+               address1,
+               address2,
+               phone,
+               fax,
+               phone_rsv,
+               website,
+               email,
+               dns,
+               remark,
+               logo,
+               photo,
+               html_info,
+               list_order,
+               create_user,
+               create_datetime,
+               modify_user,
+               modify_datetime,
+               province_code,
+               city_code,
+               district_code,
+               town_code,
+               shopping_district_code,
+               scenic_spot_code,
+               book_list_order,
+               start_level_code,
+               brand_code,
+               score,
+               category_code,
+               manage_type,
+               map_html,
+               pair_pic,
+               app_type,
+               client_type,
+               client_version,
+               online_check,
+               area1,
+               area2,
+               server_name,
+               decoration_date,
+               open_date,
+               hotel_policy
+        from zcx.hotel
+        limit #{offset}, #{limit}
+    </select>
+
+    <!--通过实体作为筛选条件查询-->
+    <select id="queryAll" resultMap="HotelMap">
+        select
+        hotel_group_id, id, code, sta, audit, descript, descript_en, descript_short, country, city, address1, address2,
+        phone, fax, phone_rsv, website, email, dns, remark, logo, photo, html_info, list_order, create_user,
+        create_datetime, modify_user, modify_datetime, province_code, city_code, district_code, town_code,
+        shopping_district_code, scenic_spot_code, book_list_order, start_level_code, brand_code, score, category_code,
+        manage_type, map_html, pair_pic, app_type, client_type, client_version, online_check, area1, area2, server_name,
+        decoration_date, open_date, hotel_policy
+        from zcx.hotel
+        <where>
+            <if test="hotelGroupId != null">
+                and hotel_group_id = #{hotelGroupId}
+            </if>
+            <if test="id != null">
+                and id = #{id}
+            </if>
+            <if test="code != null and code != ''">
+                and code = #{code}
+            </if>
+            <if test="sta != null and sta != ''">
+                and sta = #{sta}
+            </if>
+            <if test="audit != null and audit != ''">
+                and audit = #{audit}
+            </if>
+            <if test="descript != null and descript != ''">
+                and descript = #{descript}
+            </if>
+            <if test="descriptEn != null and descriptEn != ''">
+                and descript_en = #{descriptEn}
+            </if>
+            <if test="descriptShort != null and descriptShort != ''">
+                and descript_short = #{descriptShort}
+            </if>
+            <if test="country != null and country != ''">
+                and country = #{country}
+            </if>
+            <if test="city != null and city != ''">
+                and city = #{city}
+            </if>
+            <if test="address1 != null and address1 != ''">
+                and address1 = #{address1}
+            </if>
+            <if test="address2 != null and address2 != ''">
+                and address2 = #{address2}
+            </if>
+            <if test="phone != null and phone != ''">
+                and phone = #{phone}
+            </if>
+            <if test="fax != null and fax != ''">
+                and fax = #{fax}
+            </if>
+            <if test="phoneRsv != null and phoneRsv != ''">
+                and phone_rsv = #{phoneRsv}
+            </if>
+            <if test="website != null and website != ''">
+                and website = #{website}
+            </if>
+            <if test="email != null and email != ''">
+                and email = #{email}
+            </if>
+            <if test="dns != null and dns != ''">
+                and dns = #{dns}
+            </if>
+            <if test="remark != null and remark != ''">
+                and remark = #{remark}
+            </if>
+            <if test="logo != null">
+                and logo = #{logo}
+            </if>
+            <if test="photo != null and photo != ''">
+                and photo = #{photo}
+            </if>
+            <if test="htmlInfo != null and htmlInfo != ''">
+                and html_info = #{htmlInfo}
+            </if>
+            <if test="listOrder != null">
+                and list_order = #{listOrder}
+            </if>
+            <if test="createUser != null and createUser != ''">
+                and create_user = #{createUser}
+            </if>
+            <if test="createDatetime != null">
+                and create_datetime = #{createDatetime}
+            </if>
+            <if test="modifyUser != null and modifyUser != ''">
+                and modify_user = #{modifyUser}
+            </if>
+            <if test="modifyDatetime != null">
+                and modify_datetime = #{modifyDatetime}
+            </if>
+            <if test="provinceCode != null and provinceCode != ''">
+                and province_code = #{provinceCode}
+            </if>
+            <if test="cityCode != null and cityCode != ''">
+                and city_code = #{cityCode}
+            </if>
+            <if test="districtCode != null and districtCode != ''">
+                and district_code = #{districtCode}
+            </if>
+            <if test="townCode != null and townCode != ''">
+                and town_code = #{townCode}
+            </if>
+            <if test="shoppingDistrictCode != null and shoppingDistrictCode != ''">
+                and shopping_district_code = #{shoppingDistrictCode}
+            </if>
+            <if test="scenicSpotCode != null and scenicSpotCode != ''">
+                and scenic_spot_code = #{scenicSpotCode}
+            </if>
+            <if test="bookListOrder != null and bookListOrder != ''">
+                and book_list_order = #{bookListOrder}
+            </if>
+            <if test="startLevelCode != null and startLevelCode != ''">
+                and start_level_code = #{startLevelCode}
+            </if>
+            <if test="brandCode != null and brandCode != ''">
+                and brand_code = #{brandCode}
+            </if>
+            <if test="score != null and score != ''">
+                and score = #{score}
+            </if>
+            <if test="categoryCode != null and categoryCode != ''">
+                and category_code = #{categoryCode}
+            </if>
+            <if test="manageType != null and manageType != ''">
+                and manage_type = #{manageType}
+            </if>
+            <if test="mapHtml != null and mapHtml != ''">
+                and map_html = #{mapHtml}
+            </if>
+            <if test="pairPic != null and pairPic != ''">
+                and pair_pic = #{pairPic}
+            </if>
+            <if test="appType != null and appType != ''">
+                and app_type = #{appType}
+            </if>
+            <if test="clientType != null and clientType != ''">
+                and client_type = #{clientType}
+            </if>
+            <if test="clientVersion != null and clientVersion != ''">
+                and client_version = #{clientVersion}
+            </if>
+            <if test="onlineCheck != null and onlineCheck != ''">
+                and online_check = #{onlineCheck}
+            </if>
+            <if test="area1 != null and area1 != ''">
+                and area1 = #{area1}
+            </if>
+            <if test="area2 != null and area2 != ''">
+                and area2 = #{area2}
+            </if>
+            <if test="serverName != null and serverName != ''">
+                and server_name = #{serverName}
+            </if>
+            <if test="decorationDate != null">
+                and decoration_date = #{decorationDate}
+            </if>
+            <if test="openDate != null">
+                and open_date = #{openDate}
+            </if>
+            <if test="hotelPolicy != null and hotelPolicy != ''">
+                and hotel_policy = #{hotelPolicy}
+            </if>
+        </where>
+    </select>
+
+    <!--新增所有列-->
+    <insert id="insert" keyProperty="id" useGeneratedKeys="true">
+        insert into zcx.hotel(hotel_group_id, code, sta, audit, descript, descript_en, descript_short, country, city,
+                              address1, address2, phone, fax, phone_rsv, website, email, dns, remark, logo, photo,
+                              html_info, list_order, create_user, create_datetime, modify_user, modify_datetime,
+                              province_code, city_code, district_code, town_code, shopping_district_code,
+                              scenic_spot_code, book_list_order, start_level_code, brand_code, score, category_code,
+                              manage_type, map_html, pair_pic, app_type, client_type, client_version, online_check,
+                              area1, area2, server_name, decoration_date, open_date, hotel_policy)
+        values (#{hotelGroupId}, #{code}, #{sta}, #{audit}, #{descript}, #{descriptEn}, #{descriptShort}, #{country},
+                #{city}, #{address1}, #{address2}, #{phone}, #{fax}, #{phoneRsv}, #{website}, #{email}, #{dns},
+                #{remark}, #{logo}, #{photo}, #{htmlInfo}, #{listOrder}, #{createUser}, #{createDatetime},
+                #{modifyUser}, #{modifyDatetime}, #{provinceCode}, #{cityCode}, #{districtCode}, #{townCode},
+                #{shoppingDistrictCode}, #{scenicSpotCode}, #{bookListOrder}, #{startLevelCode}, #{brandCode}, #{score},
+                #{categoryCode}, #{manageType}, #{mapHtml}, #{pairPic}, #{appType}, #{clientType}, #{clientVersion},
+                #{onlineCheck}, #{area1}, #{area2}, #{serverName}, #{decorationDate}, #{openDate}, #{hotelPolicy})
+    </insert>
+
+    <insert id="insertBatch" keyProperty="id" useGeneratedKeys="true">
+        insert into zcx.hotel(hotel_group_id, code, sta, audit, descript, descript_en, descript_short, country, city,
+        address1, address2, phone, fax, phone_rsv, website, email, dns, remark, logo, photo, html_info, list_order,
+        create_user, create_datetime, modify_user, modify_datetime, province_code, city_code, district_code, town_code,
+        shopping_district_code, scenic_spot_code, book_list_order, start_level_code, brand_code, score, category_code,
+        manage_type, map_html, pair_pic, app_type, client_type, client_version, online_check, area1, area2, server_name,
+        decoration_date, open_date, hotel_policy)
+        values
+        <foreach collection="entities" item="entity" separator=",">
+            (#{entity.hotelGroupId}, #{entity.code}, #{entity.sta}, #{entity.audit}, #{entity.descript},
+            #{entity.descriptEn}, #{entity.descriptShort}, #{entity.country}, #{entity.city}, #{entity.address1},
+            #{entity.address2}, #{entity.phone}, #{entity.fax}, #{entity.phoneRsv}, #{entity.website}, #{entity.email},
+            #{entity.dns}, #{entity.remark}, #{entity.logo}, #{entity.photo}, #{entity.htmlInfo}, #{entity.listOrder},
+            #{entity.createUser}, #{entity.createDatetime}, #{entity.modifyUser}, #{entity.modifyDatetime},
+            #{entity.provinceCode}, #{entity.cityCode}, #{entity.districtCode}, #{entity.townCode},
+            #{entity.shoppingDistrictCode}, #{entity.scenicSpotCode}, #{entity.bookListOrder}, #{entity.startLevelCode},
+            #{entity.brandCode}, #{entity.score}, #{entity.categoryCode}, #{entity.manageType}, #{entity.mapHtml},
+            #{entity.pairPic}, #{entity.appType}, #{entity.clientType}, #{entity.clientVersion}, #{entity.onlineCheck},
+            #{entity.area1}, #{entity.area2}, #{entity.serverName}, #{entity.decorationDate}, #{entity.openDate},
+            #{entity.hotelPolicy})
+        </foreach>
+    </insert>
+
+    <insert id="insertOrUpdateBatch" keyProperty="id" useGeneratedKeys="true">
+        insert into zcx.hotel(hotel_group_id, code, sta, audit, descript, descript_en, descript_short, country, city,
+        address1, address2, phone, fax, phone_rsv, website, email, dns, remark, logo, photo, html_info, list_order,
+        create_user, create_datetime, modify_user, modify_datetime, province_code, city_code, district_code, town_code,
+        shopping_district_code, scenic_spot_code, book_list_order, start_level_code, brand_code, score, category_code,
+        manage_type, map_html, pair_pic, app_type, client_type, client_version, online_check, area1, area2, server_name,
+        decoration_date, open_date, hotel_policy)
+        values
+        <foreach collection="entities" item="entity" separator=",">
+            (#{entity.hotelGroupId}, #{entity.code}, #{entity.sta}, #{entity.audit}, #{entity.descript},
+            #{entity.descriptEn}, #{entity.descriptShort}, #{entity.country}, #{entity.city}, #{entity.address1},
+            #{entity.address2}, #{entity.phone}, #{entity.fax}, #{entity.phoneRsv}, #{entity.website}, #{entity.email},
+            #{entity.dns}, #{entity.remark}, #{entity.logo}, #{entity.photo}, #{entity.htmlInfo}, #{entity.listOrder},
+            #{entity.createUser}, #{entity.createDatetime}, #{entity.modifyUser}, #{entity.modifyDatetime},
+            #{entity.provinceCode}, #{entity.cityCode}, #{entity.districtCode}, #{entity.townCode},
+            #{entity.shoppingDistrictCode}, #{entity.scenicSpotCode}, #{entity.bookListOrder}, #{entity.startLevelCode},
+            #{entity.brandCode}, #{entity.score}, #{entity.categoryCode}, #{entity.manageType}, #{entity.mapHtml},
+            #{entity.pairPic}, #{entity.appType}, #{entity.clientType}, #{entity.clientVersion}, #{entity.onlineCheck},
+            #{entity.area1}, #{entity.area2}, #{entity.serverName}, #{entity.decorationDate}, #{entity.openDate},
+            #{entity.hotelPolicy})
+        </foreach>
+        on duplicate key update
+        hotel_group_id = values(hotel_group_id) , code = values(code) , sta = values(sta) , audit = values(audit) ,
+        descript = values(descript) , descript_en = values(descript_en) , descript_short = values(descript_short) ,
+        country = values(country) , city = values(city) , address1 = values(address1) , address2 = values(address2) ,
+        phone = values(phone) , fax = values(fax) , phone_rsv = values(phone_rsv) , website = values(website) , email =
+        values(email) , dns = values(dns) , remark = values(remark) , logo = values(logo) , photo = values(photo) ,
+        html_info = values(html_info) , list_order = values(list_order) , create_user = values(create_user) ,
+        create_datetime = values(create_datetime) , modify_user = values(modify_user) , modify_datetime =
+        values(modify_datetime) , province_code = values(province_code) , city_code = values(city_code) , district_code
+        = values(district_code) , town_code = values(town_code) , shopping_district_code =
+        values(shopping_district_code) , scenic_spot_code = values(scenic_spot_code) , book_list_order =
+        values(book_list_order) , start_level_code = values(start_level_code) , brand_code = values(brand_code) , score
+        = values(score) , category_code = values(category_code) , manage_type = values(manage_type) , map_html =
+        values(map_html) , pair_pic = values(pair_pic) , app_type = values(app_type) , client_type = values(client_type)
+        , client_version = values(client_version) , online_check = values(online_check) , area1 = values(area1) , area2
+        = values(area2) , server_name = values(server_name) , decoration_date = values(decoration_date) , open_date =
+        values(open_date) , hotel_policy = values(hotel_policy)
+    </insert>
+
+    <!--通过主键修改数据-->
+    <update id="update">
+        update zcx.hotel
+        <set>
+            <if test="hotelGroupId != null">
+                hotel_group_id = #{hotelGroupId},
+            </if>
+            <if test="code != null and code != ''">
+                code = #{code},
+            </if>
+            <if test="sta != null and sta != ''">
+                sta = #{sta},
+            </if>
+            <if test="audit != null and audit != ''">
+                audit = #{audit},
+            </if>
+            <if test="descript != null and descript != ''">
+                descript = #{descript},
+            </if>
+            <if test="descriptEn != null and descriptEn != ''">
+                descript_en = #{descriptEn},
+            </if>
+            <if test="descriptShort != null and descriptShort != ''">
+                descript_short = #{descriptShort},
+            </if>
+            <if test="country != null and country != ''">
+                country = #{country},
+            </if>
+            <if test="city != null and city != ''">
+                city = #{city},
+            </if>
+            <if test="address1 != null and address1 != ''">
+                address1 = #{address1},
+            </if>
+            <if test="address2 != null and address2 != ''">
+                address2 = #{address2},
+            </if>
+            <if test="phone != null and phone != ''">
+                phone = #{phone},
+            </if>
+            <if test="fax != null and fax != ''">
+                fax = #{fax},
+            </if>
+            <if test="phoneRsv != null and phoneRsv != ''">
+                phone_rsv = #{phoneRsv},
+            </if>
+            <if test="website != null and website != ''">
+                website = #{website},
+            </if>
+            <if test="email != null and email != ''">
+                email = #{email},
+            </if>
+            <if test="dns != null and dns != ''">
+                dns = #{dns},
+            </if>
+            <if test="remark != null and remark != ''">
+                remark = #{remark},
+            </if>
+            <if test="logo != null">
+                logo = #{logo},
+            </if>
+            <if test="photo != null and photo != ''">
+                photo = #{photo},
+            </if>
+            <if test="htmlInfo != null and htmlInfo != ''">
+                html_info = #{htmlInfo},
+            </if>
+            <if test="listOrder != null">
+                list_order = #{listOrder},
+            </if>
+            <if test="createUser != null and createUser != ''">
+                create_user = #{createUser},
+            </if>
+            <if test="createDatetime != null">
+                create_datetime = #{createDatetime},
+            </if>
+            <if test="modifyUser != null and modifyUser != ''">
+                modify_user = #{modifyUser},
+            </if>
+            <if test="modifyDatetime != null">
+                modify_datetime = #{modifyDatetime},
+            </if>
+            <if test="provinceCode != null and provinceCode != ''">
+                province_code = #{provinceCode},
+            </if>
+            <if test="cityCode != null and cityCode != ''">
+                city_code = #{cityCode},
+            </if>
+            <if test="districtCode != null and districtCode != ''">
+                district_code = #{districtCode},
+            </if>
+            <if test="townCode != null and townCode != ''">
+                town_code = #{townCode},
+            </if>
+            <if test="shoppingDistrictCode != null and shoppingDistrictCode != ''">
+                shopping_district_code = #{shoppingDistrictCode},
+            </if>
+            <if test="scenicSpotCode != null and scenicSpotCode != ''">
+                scenic_spot_code = #{scenicSpotCode},
+            </if>
+            <if test="bookListOrder != null and bookListOrder != ''">
+                book_list_order = #{bookListOrder},
+            </if>
+            <if test="startLevelCode != null and startLevelCode != ''">
+                start_level_code = #{startLevelCode},
+            </if>
+            <if test="brandCode != null and brandCode != ''">
+                brand_code = #{brandCode},
+            </if>
+            <if test="score != null and score != ''">
+                score = #{score},
+            </if>
+            <if test="categoryCode != null and categoryCode != ''">
+                category_code = #{categoryCode},
+            </if>
+            <if test="manageType != null and manageType != ''">
+                manage_type = #{manageType},
+            </if>
+            <if test="mapHtml != null and mapHtml != ''">
+                map_html = #{mapHtml},
+            </if>
+            <if test="pairPic != null and pairPic != ''">
+                pair_pic = #{pairPic},
+            </if>
+            <if test="appType != null and appType != ''">
+                app_type = #{appType},
+            </if>
+            <if test="clientType != null and clientType != ''">
+                client_type = #{clientType},
+            </if>
+            <if test="clientVersion != null and clientVersion != ''">
+                client_version = #{clientVersion},
+            </if>
+            <if test="onlineCheck != null and onlineCheck != ''">
+                online_check = #{onlineCheck},
+            </if>
+            <if test="area1 != null and area1 != ''">
+                area1 = #{area1},
+            </if>
+            <if test="area2 != null and area2 != ''">
+                area2 = #{area2},
+            </if>
+            <if test="serverName != null and serverName != ''">
+                server_name = #{serverName},
+            </if>
+            <if test="decorationDate != null">
+                decoration_date = #{decorationDate},
+            </if>
+            <if test="openDate != null">
+                open_date = #{openDate},
+            </if>
+            <if test="hotelPolicy != null and hotelPolicy != ''">
+                hotel_policy = #{hotelPolicy},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <!--通过主键删除-->
+    <delete id="deleteById">
+        delete
+        from zcx.hotel
+        where id = #{id}
+    </delete>
+
+</mapper>

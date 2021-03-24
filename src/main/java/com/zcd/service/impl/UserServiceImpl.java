@@ -1,7 +1,7 @@
 package com.zcd.service.impl;
 
 import javax.annotation.Resource;
-import javax.faces.validator.BeanValidator;
+import com.zcd.validator.BeanValidator;
 
 
 import com.zcd.dao.UserDao;
@@ -51,14 +51,13 @@ public class UserServiceImpl implements UserService {
     @Override
    @Transactional(readOnly = false)
     public BaseResult save(User user) {
-        /*String validator = BeanValidator.validator(user);
+         String validator = BeanValidator.validator(user);
         // 验证不通过
         if (validator != null) {
             return BaseResult.fail(validator);
         }
-
         // 通过验证
-        else {*/
+        else {
             user.setModifyDatetime(new Date());
 
 
@@ -85,10 +84,10 @@ public class UserServiceImpl implements UserService {
                     // 设置密码加密
                     user.setPassword(DigestUtils.md5DigestAsHex(user.getPassword().getBytes()));
                 }
-                update(user);
+                userDao.update(user);
             }
             return BaseResult.success("保存用户信息成功");
-        /*}*/
+        }
     }
 
 
